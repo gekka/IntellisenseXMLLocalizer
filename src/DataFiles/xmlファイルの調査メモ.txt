@@ -1,0 +1,62 @@
+﻿@see(True):	:<paramref name="timeout" /> is a negative number other than -1 milliseconds, which represents an infinite time-out
+
+-or-
+
+<paramref name="timeout" /> is greater than <see cref="F:System.Int32.MaxValue">Int32.MaxValue</see>.
+
+@paramref(False):	:Optional. An expression that specifies a relative position in the collection. The element to be added is placed in the collection before the element identified by the <paramref name="Before" /> argument. If <paramref name="Before" /> is a numeric expression, it must be a number from 1 through the value of the collection's <see cref="P:Microsoft.VisualBasic.Collection.Count" /> property. If <paramref name="Before" /> is a <see langword="String" /> expression, it must correspond to the key string specified when the element being referred to was added to the collection. You cannot specify both <paramref name="Before" /> and <paramref name="After" />.
+
+@c(True):	:Required. The numeric designation of the month, from 1 through 13; 1 indicates January and 12 indicates December. You can use the value 13 with a 13-month calendar. If your system is using a 12-month calendar and <paramref name="Month" /> is 13, <c>MonthName</c> returns an empty string.
+
+@@@@list(True):	:One of the following values:  
+  
+ <list type="table"><listheader><term>Value</term><description>File access mode</description></listheader><item><term>1</term><description><see langword="OpenMode.Input" /></description></item><item><term>2</term><description><see langword="OpenMode.Output" /></description></item><item><term>4</term><description><see langword="OpenMode.Random" /></description></item><item><term>8</term><description><see langword="OpenMode.Append" /></description></item><item><term>32</term><description><see langword="OpenMode.Binary" /></description></item></list>
+
+@typeparamref(False):	:When this method returns, <paramref name="result" /> contains an object from the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" /> or the default value of <typeparamref name="T" /> if the operation failed.
+
+@xref(False):	:Copies the elements of the <xref data-throw-if-not-resolved="true" uid="System.Collections.ICollection"></xref> to an <xref data-throw-if-not-resolved="true" uid="System.Array"></xref>, starting at a particular <xref data-throw-if-not-resolved="true" uid="System.Array"></xref> index.
+
+@code(True):	:The zero-based index in <code data-dev-comment-type="paramref">array</code> at which copying begins.
+
+@strong(True):	: For database providers which support it, contains a standard SQL 5-character return code indicating the success or failure of the database operation. The first 2 characters represent the <strong>class</strong> of the return code (e.g. error, success), while the last 3 characters represent the <strong>subclass</strong>, allowing detection of error scenarios in a database-portable way.
+
+@br(False):	:Specifies that the process performs time-critical tasks that must be executed immediately, such as the <see langword="Task List" /> dialog, which must respond quickly when called by the user, regardless of the load on the operating system. The threads of the process preempt the threads of normal or idle priority class processes. <br />Use extreme care when specifying <see langword="High" /> for the process's priority class, because a high priority class application can use nearly all available processor time.
+
+@para(True):	:One of the enumeration values that specifies the type of access allowed to the memory-mapped file.
+ <para>This parameter can't be set to <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.Write" />.</para>
+
+@@@@ul(True):	:The status of the <see cref="T:System.Net.Sockets.Socket" /> based on the polling mode value passed in the <paramref name="mode" /> parameter.
+          <ul><li>For <see cref="F:System.Net.Sockets.SelectMode.SelectRead" />, it returns <see langword="true" /> if <see cref="M:System.Net.Sockets.Socket.Listen" /> has been called and a connection is pending, if data is available for reading, or if the connection has been closed, reset, or terminated.</li><li>For <see cref="F:System.Net.Sockets.SelectMode.SelectWrite" />, it returns <see langword="true" /> if processing a <see cref="Overload:System.Net.Sockets.Socket.Connect" /> and the connection has succeeded or if data can be sent.</li><li>For <see cref="F:System.Net.Sockets.SelectMode.SelectError" />, it returns <see langword="true" /> if processing a <see cref="Overload:System.Net.Sockets.Socket.Connect" /> that does not block and the connection has failed, or if <see cref="F:System.Net.Sockets.SocketOptionName.OutOfBandInline" /> is not set and out-of-band data is available.</li><li>Otherwise, it returns <see langword="false" />.</li></ul>
+
+@sub(True):	:log<sub>10</sub>(<code data-dev-comment-type="paramref">x</code> + 1)
+
+@@@@table(True):	:A signed number that indicates the relative values of this instance and <code data-dev-comment-type="paramref">target</code>.
+
+ <table><thead><tr><th> Value</th><th> Meaning</th></tr></thead><tbody><tr><td> Less than zero</td><td> The value of this instance is less than the value of <code data-dev-comment-type="paramref">target</code>.</td></tr><tr><td> Zero</td><td> The value of this instance is equal to the value of <code data-dev-comment-type="paramref">target</code>.</td></tr><tr><td> Greater than zero</td><td> The value of this instance is greater than the value of <code data-dev-comment-type="paramref">target</code>, or <code data-dev-comment-type="paramref">target</code> is <code data-dev-comment-type="langword">null</code>.</td></tr></tbody></table>
+
+@sup(True):	:10<sup><paramref name="x" /></sup>
+
+@em(True):	:<see langword="true" /> if disposing the <see cref="T:System.IO.Stream" /> returned by this method should <em>not</em> dispose <paramref name="innerStream" />.
+
+
+
+/////////////////
+netstandard2.1よりも前のnetstandard.xmlは壊れてる
+    例：
+    <member name="M:System.Collections.CaseInsensitiveComparer.Compare(System.Object,System.Object)">
+      <summary>Performs a case-insensitive comparison of two objects of the same type and returns a value indicating whether one is less than, equal to, or greater than the other.</summary>
+      <param name="a">The first object to compare.</param>
+      <param name="b">The second object to compare.</param>
+      <returns><p sourcefile="netstandard.yml" sourcestartlinenumber="1" sourceendlinenumber="2"><p sourcefile="netstandard.yml" sourcestartlinenumber="1" sourceendlinenumber="1">A signed integer that indicates the relative values of <code data-dev-comment-type="paramref">a</code> and <code data-dev-comment-type="paramref">b</code>, as shown in the following table.  </p>
+ <table><thead><tr><th> Value  <p>
+<p sourcefile="netstandard.yml" sourcestartlinenumber="4" sourceendlinenumber="4"> </th><th> Meaning  <p> ここが閉じてないのでエラーになる
+<p sourcefile="netstandard.yml" sourcestartlinenumber="6" sourceendlinenumber="6"> </th></tr></thead><tbody><tr><td> Less than zero  <p>
+<p sourcefile="netstandard.yml" sourcestartlinenumber="8" sourceendlinenumber="8"> </td><td><code data-dev-comment-type="paramref">a</code> is less than <code data-dev-comment-type="paramref">b</code>, with casing ignored.  <p>
+<p sourcefile="netstandard.yml" sourcestartlinenumber="10" sourceendlinenumber="10"> </td></tr><tr><td> Zero  <p>
+<p sourcefile="netstandard.yml" sourcestartlinenumber="12" sourceendlinenumber="12"> </td><td><code data-dev-comment-type="paramref">a</code> equals <code data-dev-comment-type="paramref">b</code>, with casing ignored.  <p>
+<p sourcefile="netstandard.yml" sourcestartlinenumber="14" sourceendlinenumber="14"> </td></tr><tr><td> Greater than zero  <p>
+<p sourcefile="netstandard.yml" sourcestartlinenumber="16" sourceendlinenumber="16"> </td><td><code data-dev-comment-type="paramref">a</code> is greater than <code data-dev-comment-type="paramref">b</code>, with casing ignored.  <p>
+<p sourcefile="netstandard.yml" sourcestartlinenumber="18" sourceendlinenumber="18"> </td></tr></tbody></table></p>
+</returns>
+      <exception cref="T:System.ArgumentException">Neither <paramref name="a">a</paramref> nor <paramref name="b">b</paramref> implements the <see cref="T:System.IComparable"></see> interface.   -or-  <paramref name="a">a</paramref> and <paramref name="b">b</paramref> are of different types.</exception>
+    </member>

@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+      <!--<TargetFramework>net6.0-windows</TargetFramework>-->
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <RootNamespace>Gekka.Language.IntellisenseXMLLocalizer</RootNamespace>
+    <BaseOutputPath>../Output</BaseOutputPath>
+      <!--<LangVersion>10.0</LangVersion>-->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;8981</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;8981</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Browser\**" />
+    <Compile Remove="Doc\**" />
+    <Compile Remove="Translators\**" />
+    <Compile Remove="Win\**" />
+    <EmbeddedResource Remove="Browser\**" />
+    <EmbeddedResource Remove="Doc\**" />
+    <EmbeddedResource Remove="Translators\**" />
+    <EmbeddedResource Remove="Win\**" />
+    <None Remove="Browser\**" />
+    <None Remove="Doc\**" />
+    <None Remove="Translators\**" />
+    <None Remove="Win\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Test.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Doc\DocXml.cs" />
+    <Compile Include="Doc\DocXmlItem.cs" />
+    <Compile Include="Doc\TextRange.cs" />
+    <Compile Include="Doc\NodeExtension.cs" />
+    <Compile Include="Doc\XmlChecker.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\DataFiles\Dictionary.ja.dat" Link="Dictionary.ja.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\DataFiles\InputXmlFIles.list" Link="InputXmlFIles.list">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\DataFiles\SkipFiles.list" Link="SkipFiles.list">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Translator\Translator.csproj" />
+  </ItemGroup>
+
+</Project>

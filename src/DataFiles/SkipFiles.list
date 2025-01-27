@@ -1,0 +1,10 @@
+﻿## 読み込みから除外するファイル名を指定
+
+################################################################################
+
+# XMLが不正 https://github.com/dotnet/aspnetcore/pull/59333
+"Microsoft.AspNetCore.Localization.xml"
+
+
+# XMLコメントの構造がおかしい https://github.com/dotnet/aspnetcore/issues/60039
+"Microsoft.AspNetCore.Mvc.Razor.xml"

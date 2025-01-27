@@ -1,0 +1,6 @@
+﻿CredRead
+CredFree
+CredEnumerate
+
+ShowWindow
+

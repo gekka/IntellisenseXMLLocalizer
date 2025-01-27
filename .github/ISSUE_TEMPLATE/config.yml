@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Community Support
+    url: https://github.com/gekka/IntelliSenseXMLTranslator/discussions/new
+    about: バグレポート以外の要望や質問
