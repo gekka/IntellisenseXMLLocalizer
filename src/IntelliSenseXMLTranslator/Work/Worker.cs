@@ -40,6 +40,9 @@
 
         public bool IsCheckXMLOnly { get; set; } = false;
 
+        /// <summary>翻訳済みファイルを上書きするか</summary>
+        public bool IsForeOverwrite { get; set; } = false;
+
         //変換結果をどのように挿入もしくは置換するか
         public InsertPoint InsertPoint { get; set; } = InsertPoint.RemoveOriginal;
 
@@ -72,17 +75,32 @@
                 //var outputXML = System.IO.Path.Combine(outputDir, xml);
                 if (File.Exists(outputXML) && !IsCheckXMLOnly)
                 {
-                    //既に変換済みのファイル
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("翻訳済みなのでスキップします");
-                    continue;
+                    if (IsForeOverwrite)
+                    {
+                        try
+                        {
+                            System.IO.File.Delete(outputXML);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new ApplicationException("翻訳済みファイルを上書きできませんでした\r\n" + outputXML, ex);
+                        }
+                    }
+                    else
+                    {
+                        //既に変換済みのファイル
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("翻訳済みなのでスキップします");
+                        continue;
+                    }
                 }
                 Console.ResetColor();
 
                 DocXml dx;
                 try
                 {
-                    dx = DocXml.Load(inputXML);
+                    //XMLコメントファイルを読み込む
+                    dx = DocXml.Load(new System.IO.FileInfo(inputXML), Console.Out);
                 }
                 catch (Exception ex)
                 {
@@ -92,7 +110,16 @@
                     }
                     throw;
                 }
-                var textRanges = dx.Items.Where(_ => !_.IsCodeNode).SelectMany(_ => _.Texts).ToArray();
+
+                var xx = dx.Items.Where(_ => _.Node.Name == "appledoc")
+                    .Select(_ =>
+                    {
+                        return _.Texts;
+                    }).ToArray(); ;
+
+
+
+                TextRange[] textRanges = FilterItems(dx.Items);//  dx.Items.Where(_ => !_.IsCodeNode).SelectMany(_ => _.Texts).ToArray();
 
                 if (textRanges.Count() == 0)
                 {
@@ -136,6 +163,24 @@
             }
         }
 
+        /// <summary>翻訳対象のみになるようにフィルターする</summary>
+        private TextRange[] FilterItems(IEnumerable<DocXmlItem> items)
+        {
+            System.Text.RegularExpressions.Regex regUrl = new System.Text.RegularExpressions.Regex(@"^\s*https?://[^\s]+\s*$");
+            return items.Where(_ => !_.IsCodeNode)
+                .SelectMany(_ => _.Texts)
+                .Where(_ =>
+                {
+                    if (regUrl.IsMatch(_.SourceText.Trim()))
+                    {
+                        return false;
+                    }
+                    return true;
+                })
+                .ToArray();
+        }
+
+
         private void AddComment(DocXml dx)
         {
             var docNode = dx.XmlDocument.SelectSingleNode("doc");
@@ -163,7 +208,7 @@
         }
 
         /// <summary>翻訳元の文を翻訳する</summary>
-        /// <param name="dicPair"></param>
+        /// <param name="parameter"></param>
         /// <returns></returns>
         private async Task WorkGetSentenseTranslatedTextAsync(WorkingParameter parameter)
         {
@@ -228,6 +273,7 @@
         }
 
         /// <summary>辞書を参照して文字列置換を実行する</summary>
+        /// <param name="parameter"></param>
         /// <param name="textRanges"></param>
         /// <returns></returns>
         private async Task<WorkingParameter> WorkReplace(WorkingParameter parameter, TextRange[] textRanges)
